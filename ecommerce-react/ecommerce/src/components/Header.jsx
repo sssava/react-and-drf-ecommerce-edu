@@ -1,6 +1,8 @@
 import React from 'react';
 
 import {Container, Nav, Navbar} from 'react-bootstrap';
+import {Link} from "react-router-dom";
+import {LinkContainer} from "react-router-bootstrap"
 
 
 const Header = () => {
@@ -8,7 +10,7 @@ const Header = () => {
         <div>
             <Navbar bg="dark" variant="dark">
             <Container>
-            <Navbar.Brand href="#">Rooty</Navbar.Brand>
+            <Link className="text-decoration-none" to="/"><Navbar.Brand>Rooty</Navbar.Brand></Link>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -16,9 +18,9 @@ const Header = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
             >
-            <Nav.Link href="#action1"><i className="fas fa-home"></i> Home</Nav.Link>
-            <Nav.Link href="#action1"><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
-            <Nav.Link href="#action3"><i className="fas fa-user"></i> Login</Nav.Link>
+            <LinkContainer className="text-decoration-none" to="/"><Nav.Link><i className="fas fa-home"></i> Home</Nav.Link></LinkContainer>
+            <LinkContainer className="text-decoration-none" to="/cart"><Nav.Link><i className="fas fa-shopping-cart"></i> Cart</Nav.Link></LinkContainer>
+            <LinkContainer className="text-decoration-none" to="/login"><Nav.Link><i className="fas fa-user"></i> Login</Nav.Link></LinkContainer>
             </Nav>
             </Navbar.Collapse>
             </Container>
