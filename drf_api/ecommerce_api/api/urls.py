@@ -4,5 +4,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('', home, name="home"),
+    path('', ProductAPIList.as_view(), name="product-list"),
+    path('product/<int:pk>/', ProductAPIGet.as_view(), name="product-get")
 ]
