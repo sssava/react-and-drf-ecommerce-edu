@@ -3,12 +3,12 @@ import {Card} from "react-bootstrap";
 import Rating from "./Rating";
 import {Link} from "react-router-dom";
 
-const Product = ({_id, name, image, description, brand, category, price, countInStock, rating, numReviews}) => {
+const Product = ({id, name, image, description, brand, category, price, countInStock, rating, numReviews}) => {
     return (
         <Card className="my-3 p-3 rounded">
-            <Link to={`/product/${_id}`}><Card.Img src={image} /></Link>
+            <Link to={`/product/${id}`}><Card.Img src={image} /></Link>
             <Card.Body>
-                <Link to={`/product/${_id}`}>
+                <Link to={`/product/${id}`}>
                     <Card.Title>
                         <strong>{name}</strong>
                     </Card.Title>
