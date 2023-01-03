@@ -2,38 +2,40 @@ import React from 'react';
 import {Row, Col} from "react-bootstrap";
 import Product from "../Product";
 
-import axios from "axios";
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
+
+import {fetchProducts} from "../../redux/slices/productsSlice";
+import {useDispatch, useSelector} from "react-redux";
+import Loader from "../Loader";
 
 
 
 const HomeScreen = () => {
-    const [products, setProducts] = useState([])
+
+    const dispatch = useDispatch()
+    const { products, status } = useSelector(state => state.products)
 
     useEffect(() => {
-        async function fetchProducts(){
-            try {
-                const productResp = await axios.get('http://127.0.0.1:8000/home/')
-                setProducts(productResp.data)
-            }catch (error){
-                alert("Ошибка загрузки данных")
-                console.log(error)
-            }
-
+        async function fetchData(){
+            dispatch(fetchProducts())
         }
-        fetchProducts()
-    }, [])
+        fetchData()
+    }, [dispatch])
 
     return (
         <div>
             <h1 className="text-center">Latest Products</h1>
-            <Row>
-                {products.map(product => (
-                    <Col key={product.id} sm={12} md={4} lg={4} xl={3}>
-                        <Product {...product}/>
-                    </Col>
-                ))}
-            </Row>
+            {
+                status === 'loading' ? <Loader /> :
+                status === 'success' ? <Row>
+                    {products.map(product => (
+                        <Col key={product.id} sm={12} md={4} lg={4} xl={3}>
+                            <Product {...product}/>
+                        </Col>
+                    ))}
+                </Row> : status.error
+            }
+
         </div>
     );
 };
